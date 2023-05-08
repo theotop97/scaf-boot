@@ -4,6 +4,7 @@ import com.scaf.domain.entity.User;
 import com.scaf.service.UserService;
 import com.scaf.service.business.vo.UserVo;
 import com.scaf.service.exception.UserException;
+import com.scaf.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
     @GetMapping("/test")
     public List<User> test() {
         List<User> list = userService.list();
@@ -30,5 +34,10 @@ public class UserController {
     @GetMapping("/getuser")
     public UserVo getUser() {
         return userService.getUser();
+    }
+
+    @GetMapping("/getredis")
+    public Object getRedis() {
+        return redisUtil.get("hello");
     }
 }

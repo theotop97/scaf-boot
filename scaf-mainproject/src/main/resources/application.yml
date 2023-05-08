@@ -6,6 +6,11 @@ logging:
     root: info
 
 spring:
+  redis:
+    host: 1.14.60.4
+    port: 8973
+    password: 123.come
+
   datasource:
     url: jdbc:mysql://1.14.60.4:8603/theo?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
