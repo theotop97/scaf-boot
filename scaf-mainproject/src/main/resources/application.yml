@@ -3,6 +3,8 @@ server:
 
 logging:
   level:
+    com.baomidou.mybatisplus: DEBUG
+    com.scaf.mapper: DEBUG
     root: info
 
 spring:
@@ -46,7 +48,7 @@ spring:
       #如果允许时报错  java.lang.ClassNotFoundException: org.apache.log4j.Priority
       #则导入 log4j 依赖即可，Maven 地址：https://mvnrepository.com/artifact/log4j/log4j
       # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，比如不配置stat,我们在Druid的监控页面中就拿不到想要的信息。
-      filters: stat,wall,log4j,config
+      filters: stat,wall,config
       # 合并多个DruidDataSource的监控数据
       useGlobalDataSourceStat: true
       # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
@@ -83,7 +85,7 @@ spring:
 mybatis-plus:
   configuration:
     # 日志
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
   global-config:
     db-config:
       logic-delete-field: delFlag
