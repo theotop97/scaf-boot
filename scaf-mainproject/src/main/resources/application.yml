@@ -82,10 +82,10 @@ spring:
     multipart:
       max-file-size: 2MB
       max-request-size: 5MB
-mybatis-plus:
-  configuration:
-    # 日志
-    log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
+#mybatis-plus:
+#  configuration:
+#    # 日志
+#    log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
   global-config:
     db-config:
       logic-delete-field: delFlag
