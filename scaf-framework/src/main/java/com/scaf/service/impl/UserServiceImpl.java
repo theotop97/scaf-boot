@@ -41,7 +41,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //分页查询
 
         Page<User> page = new Page<>(pageNum, pageSize);
-        userMapper.selectPage(page, queryWrapper);
         page(page, queryWrapper);
         List<UserVo> userVos = BeanCopyUtils.copyBeanList(page.getRecords(), UserVo.class);
         return new PageVo(userVos, page.getTotal());
