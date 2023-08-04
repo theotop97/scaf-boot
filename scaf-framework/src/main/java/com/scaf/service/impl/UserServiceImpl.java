@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scaf.domain.entity.User;
 import com.scaf.mapper.UserMapper;
 import com.scaf.service.UserService;
+import com.scaf.service.business.UpdateUserDto;
 import com.scaf.service.business.vo.PageVo;
 import com.scaf.service.business.vo.UserVo;
 import com.scaf.utils.BeanCopyUtils;
@@ -44,5 +45,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         page(page, queryWrapper);
         List<UserVo> userVos = BeanCopyUtils.copyBeanList(page.getRecords(), UserVo.class);
         return new PageVo(userVos, page.getTotal());
+    }
+
+    @Override
+    public Boolean updateUser(UpdateUserDto updateUserDto) {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUserId, updateUserDto.getUserId());
+        User user = userMapper.selectOne(queryWrapper);
+        user.setUserName(updateUserDto.getUserName());
+        user.setMail(updateUserDto.getMail());
+        user.setPhoneNumber(updateUserDto.getPhoneNumber());
+        return userMapper.updateById(user) == 1;
+
     }
 }

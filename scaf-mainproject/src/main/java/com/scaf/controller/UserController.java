@@ -2,6 +2,7 @@ package com.scaf.controller;
 
 import com.scaf.domain.entity.User;
 import com.scaf.service.UserService;
+import com.scaf.service.business.UpdateUserDto;
 import com.scaf.service.business.vo.PageVo;
 import com.scaf.service.business.vo.UserVo;
 import com.scaf.service.exception.UserException;
@@ -9,17 +10,23 @@ import com.scaf.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import jdk.jfr.Unsigned;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.util.List;
 
 @Api(tags = "user模块")
+@Validated
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -44,17 +51,23 @@ public class UserController {
 
     @ApiOperation(value = "根据id查询user信息")
     @GetMapping("/getUser")
-    public UserVo getUser(@ApiParam(value = "id") Long id) {
+    public UserVo getUser(@ApiParam(value = "id") @NotNull(message = "id不能为空") Long id) {
         return userService.getUser(id);
     }
 
     @ApiOperation(value = "分页获取所有user信息")
     @GetMapping("/getUserList")
-    public PageVo getUserList(@ApiParam(value = "页数") Integer pageNum,
-                              @ApiParam(value = "每页数量") Integer pageSize,
+    public PageVo getUserList(@ApiParam(value = "页数") @NotNull(message = "页数不能为空") @Min(value = 0, message = "页数不能小于0") Integer pageNum,
+                              @ApiParam(value = "每页数量") @NotNull(message = "每页数量不能为空") @Min(value = 0, message = "每页数量不能小于0") Integer pageSize,
                               @ApiParam(value = "id") Long id) {
         return userService.getUserList(pageNum, pageSize, id);
 
+    }
+
+    @ApiOperation("")
+    @PostMapping("updateUser")
+    public Boolean updateUser(@RequestBody @Valid UpdateUserDto updateUserDto) {
+        return userService.updateUser(updateUserDto);
     }
 
     @ApiOperation(value = "redis测试类")

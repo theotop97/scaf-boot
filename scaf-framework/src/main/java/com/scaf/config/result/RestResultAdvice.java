@@ -30,11 +30,11 @@ public class RestResultAdvice implements ResponseBodyAdvice<Object> {
             return body;
         } else if (body instanceof String) {
             try {
-                return objectMapper.writeValueAsString(new RestResult("0", body));
+                return objectMapper.writeValueAsString(new RestResult("0", body, System.currentTimeMillis()));
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
         }
-        return new RestResult("0", body);
+        return new RestResult("0", body, System.currentTimeMillis());
     }
 }
