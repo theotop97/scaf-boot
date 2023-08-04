@@ -61,7 +61,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public Object httpMessageNotReadableException(MethodArgumentNotValidException e) {
-        log.warn("param_not_readable_error: ", e);
+        log.warn("param_not_valid: ", e);
         return new RestResult(EnumMsg.ParamError.errno(), EnumMsg.ParamError.errmsg(),  System.currentTimeMillis());
     }
 

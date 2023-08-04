@@ -41,6 +41,7 @@
                 </executions>
             </plugin>
         </plugins>
+        <finalName>scaf-boot</finalName>
     </build>
 
 
