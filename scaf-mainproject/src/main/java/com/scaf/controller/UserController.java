@@ -2,8 +2,9 @@ package com.scaf.controller;
 
 import com.scaf.domain.entity.User;
 import com.scaf.service.UserService;
-import com.scaf.service.business.UpdateUserDto;
+import com.scaf.service.business.dto.UpdateUserDto;
 import com.scaf.service.business.vo.PageVo;
+import com.scaf.service.business.vo.UserDetailVo;
 import com.scaf.service.business.vo.UserVo;
 import com.scaf.service.exception.UserException;
 import com.scaf.utils.RedisUtil;
@@ -49,6 +50,12 @@ public class UserController {
     @GetMapping("/getUser")
     public UserVo getUser(@ApiParam(value = "id") @NotNull(message = "id不能为空") Long id) {
         return userService.getUser(id);
+    }
+    @ApiOperation(value = "根据path读取的id查询user信息")
+    @GetMapping("/getUserDetail/{id}")
+    public UserDetailVo getUserDetail(@PathVariable("id") Long id) {
+
+        return userService.getUserDetail(id);
     }
 
     @ApiOperation(value = "分页获取所有user信息")

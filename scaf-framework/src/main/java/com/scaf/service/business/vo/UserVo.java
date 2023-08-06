@@ -2,13 +2,14 @@ package com.scaf.service.business.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.scaf.domain.entity.User;
-import io.swagger.models.auth.In;
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel("user 返回结果")
 @Data
 public class UserVo {
     @JsonProperty("user_name")

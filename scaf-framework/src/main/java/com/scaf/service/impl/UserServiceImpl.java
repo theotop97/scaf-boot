@@ -1,17 +1,16 @@
 package com.scaf.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scaf.domain.entity.User;
 import com.scaf.mapper.UserMapper;
 import com.scaf.service.UserService;
-import com.scaf.service.business.UpdateUserDto;
+import com.scaf.service.business.dto.UpdateUserDto;
 import com.scaf.service.business.vo.PageVo;
+import com.scaf.service.business.vo.UserDetailVo;
 import com.scaf.service.business.vo.UserVo;
 import com.scaf.utils.BeanCopyUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -52,10 +51,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(User::getUserId, updateUserDto.getUserId());
         User user = userMapper.selectOne(queryWrapper);
+        if (!Objects.nonNull(user)) {
+            return false;
+        }
         user.setUserName(updateUserDto.getUserName());
         user.setMail(updateUserDto.getMail());
         user.setPhoneNumber(updateUserDto.getPhoneNumber());
         return userMapper.updateById(user) == 1;
 
+    }
+
+    @Override
+    public UserDetailVo getUserDetail(Long id) {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getId, id);
+        User user = userMapper.selectOne(queryWrapper);
+        if (Objects.nonNull(user)) {
+            return UserDetailVo.convert(user);
+        }
+        return new UserDetailVo();
     }
 }

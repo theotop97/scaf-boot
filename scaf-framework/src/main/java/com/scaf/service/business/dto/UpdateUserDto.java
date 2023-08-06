@@ -1,12 +1,10 @@
-package com.scaf.service.business;
+package com.scaf.service.business.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
