@@ -1,12 +1,17 @@
 package com.scaf.config.result;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.scaf.service.exception.ExceptMsg;
 
 public class RestResult {
 
+    @JsonProperty("err_no")
     private int errNo;
+    @JsonProperty("err_message")
     private String errMessage;
+    @JsonProperty("data")
     private Object data;
+    @JsonProperty("timestamp")
     private Long timestamp;
 
 
