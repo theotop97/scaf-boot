@@ -1,5 +1,7 @@
 package com.scaf.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -32,6 +34,9 @@ public class User implements Serializable {
     private Integer phoneNumber;
     @ApiModelProperty("用户邮箱")
     private String mail;
+    @ApiModelProperty("删除状态")
+    @TableLogic
+    private Integer deleteStatus;
 
 
 }

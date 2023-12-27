@@ -1,5 +1,6 @@
 package com.scaf.controller;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.scaf.domain.entity.User;
 import com.scaf.service.UserService;
 import com.scaf.service.business.dto.UpdateUserDto;
@@ -14,6 +15,7 @@ import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,9 +62,9 @@ public class UserController {
 
     @ApiOperation(value = "分页获取所有user信息")
     @GetMapping("/getUserList")
-    public PageVo getUserList(@ApiParam(value = "页数") @NotNull(message = "页数不能为空") @Min(value = 0, message = "页数不能小于0") Integer pageNum,
-                              @ApiParam(value = "每页数量") @NotNull(message = "每页数量不能为空") @Min(value = 0, message = "每页数量不能小于0") Integer pageSize,
-                              @ApiParam(value = "id") Long id) {
+    public PageVo getUserList(@ApiParam(value = "页数")   @RequestParam(value = "page_num",defaultValue = "1")  Integer pageNum,
+                              @ApiParam(value = "每页数量")  @RequestParam(value = "page_size",defaultValue = "20") Integer pageSize,
+                              @ApiParam(value = "id")  Long id) {
         return userService.getUserList(pageNum, pageSize, id);
 
     }

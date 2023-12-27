@@ -86,9 +86,9 @@ spring:
 #  configuration:
 #    # 日志
 #    log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
-  global-config:
-    db-config:
-      logic-delete-field: delFlag
-      logic-delete-value: 1
-      logic-not-delete-value: 0
-      id-type: auto
+#  global-config:
+#    db-config:
+#      logic-delete-field: deleteStatus
+#      logic-delete-value: 1
+#      logic-not-delete-value: 0
+#      id-type: auto

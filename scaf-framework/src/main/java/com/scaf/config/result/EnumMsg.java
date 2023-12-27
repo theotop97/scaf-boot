@@ -4,7 +4,7 @@ package com.scaf.config.result;
 import com.scaf.service.exception.ExceptMsg;
 
 public enum EnumMsg implements ExceptMsg {
-    ParamError("-2", "参数错误!"),
+    ParamError("-2", "参数错误"),
     ParamTypeError("-2", "参数类型错误");
 
     private String code;

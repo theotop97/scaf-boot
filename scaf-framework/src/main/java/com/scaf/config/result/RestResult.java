@@ -13,6 +13,8 @@ public class RestResult {
     private Object data;
     @JsonProperty("timestamp")
     private Long timestamp;
+    @JsonProperty("log_id")
+    private String logId;
 
 
     public RestResult(String errMessage, Object data, Long timestamp) {
@@ -56,7 +58,8 @@ public class RestResult {
                 "errNo=" + errNo +
                 ", errMessage='" + errMessage + '\'' +
                 ", data=" + data +
-                ", timestamp='" + timestamp + '\'' +
+                ", timestamp=" + timestamp +
+                ", logId='" + logId + '\'' +
                 '}';
     }
 
@@ -90,5 +93,13 @@ public class RestResult {
 
     public void setTimestamp() {
         this.timestamp = timestamp;
+    }
+
+    public void setLogId (String logId) {
+        this.logId = logId;
+    }
+
+    public String getLogId() {
+        return logId;
     }
 }

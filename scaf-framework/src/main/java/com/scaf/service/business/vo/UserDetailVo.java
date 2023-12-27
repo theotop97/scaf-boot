@@ -22,12 +22,16 @@ public class UserDetailVo {
     @JsonProperty("mail")
     private String mail;
 
+    @JsonProperty("delete_status")
+    private Integer deleteStatus;
+
     public static UserDetailVo convert(User user) {
         UserDetailVo userDetailVo = new UserDetailVo();
         userDetailVo.setUserName(user.getUserName());
         userDetailVo.setUserId(user.getUserId());
         userDetailVo.setPhoneNumber(user.getPhoneNumber());
         userDetailVo.setMail(user.getMail());
+        userDetailVo.setDeleteStatus(user.getDeleteStatus());
         return userDetailVo;
     }
 }

@@ -1,6 +1,7 @@
 package com.scaf.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scaf.domain.entity.User;
@@ -10,6 +11,7 @@ import com.scaf.service.business.dto.UpdateUserDto;
 import com.scaf.service.business.vo.PageVo;
 import com.scaf.service.business.vo.UserDetailVo;
 import com.scaf.service.business.vo.UserVo;
+import com.scaf.service.exception.SystemException;
 import com.scaf.utils.BeanCopyUtils;
 import org.springframework.stereotype.Service;
 
@@ -63,12 +65,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public UserDetailVo getUserDetail(Long id) {
-        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(User::getId, id);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",id);
         User user = userMapper.selectOne(queryWrapper);
         if (Objects.nonNull(user)) {
             return UserDetailVo.convert(user);
         }
-        return new UserDetailVo();
+        return null;
     }
 }
